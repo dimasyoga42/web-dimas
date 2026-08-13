@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { getSession } from "next-auth/react";
 
-const API_URL = process.env.NEXT_PUBLIC_GO_API_URL || "http://localhost:8080";
+const API_URL = process.env.NEXT_PUBLIC_GO_API_URL || "server.dimasyoga.my.id";
 
 async function parseJsonSafely(res) {
   const text = await res.text();
