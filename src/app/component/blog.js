@@ -117,7 +117,7 @@ const BlogListPage = () => {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {blogs.map((blog, index) => (
                 <Link
-                  key={blog.judul}
+                  key={blog.id}
                   href={`/blog/${blog.judul}`}
                   className="group h-full"
                 >
