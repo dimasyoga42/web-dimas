@@ -1,0 +1,857 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-spacegrotesk: "Space Grotesk", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+}
+
+/* =========================================================
+   FONT
+========================================================= */
+
+.font-heading {
+  font-family: var(--font-spacegrotesk), sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+/* =========================================================
+   GRID BACKGROUND
+========================================================= */
+
+.bg-grid {
+  background-color: #fef9c3;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 40px 40px;
+}
+
+/* =========================================================
+   MARKDOWN
+========================================================= */
+
+.markdown-body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  font-family: var(--font-poppins), sans-serif;
+
+  color: #111;
+
+  font-size: 0.95rem;
+
+  line-height: 1.8;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-family:
+    var(--font-spacegrotesk),
+    sans-serif;
+
+  color: #000;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.02em;
+}
+
+.markdown-body h1 {
+  font-size: 2rem;
+
+  margin: 2.5rem 0 1.25rem;
+
+  padding-bottom: 0.6rem;
+
+  border-bottom: 3px solid #000;
+}
+
+.markdown-body h2 {
+  font-size: 1.6rem;
+
+  margin: 2.25rem 0 1rem;
+
+  padding-bottom: 0.4rem;
+
+  border-bottom: 2px solid #000;
+}
+
+.markdown-body h3 {
+  font-size: 1.3rem;
+
+  margin: 1.75rem 0 0.7rem;
+}
+
+.markdown-body h4 {
+  font-size: 1.1rem;
+
+  margin: 1.5rem 0 0.6rem;
+}
+
+/* =========================================================
+   PARAGRAPH
+========================================================= */
+
+.markdown-body p {
+  margin: 1rem 0;
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.markdown-body strong {
+  color: #000;
+  font-weight: 700;
+}
+
+.markdown-body em {
+  font-style: italic;
+}
+
+.markdown-body del {
+  color: #9ca3af;
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.markdown-body a {
+  color: #15803d;
+
+  font-weight: 600;
+
+  text-decoration: underline;
+
+  text-decoration-thickness: 2px;
+
+  text-underline-offset: 3px;
+
+  overflow-wrap: anywhere;
+
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+.markdown-body a:hover {
+  color: #000;
+
+  background-color: #22c55e;
+
+  text-decoration: none;
+}
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.markdown-body ul,
+.markdown-body ol {
+  margin: 1rem 0;
+
+  padding-left: 1.7rem;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.markdown-body li {
+  margin: 0.4rem 0;
+}
+
+.markdown-body li::marker {
+  color: #16a34a;
+
+  font-weight: 800;
+}
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.markdown-body input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+
+  margin-right: 0.5rem;
+
+  accent-color: #22c55e;
+
+  vertical-align: middle;
+}
+
+/* =========================================================
+   BLOCKQUOTE
+========================================================= */
+
+.markdown-body blockquote {
+  display: flex;
+
+  gap: 0.75rem;
+
+  margin: 1.75rem 0;
+
+  padding: 1rem 1.25rem;
+
+  border: 2px solid #000;
+
+  border-left: 6px solid #22c55e;
+
+  background-color: #f9fafb;
+
+  color: #374151;
+
+  font-style: italic;
+}
+
+.blockquote-mark {
+  flex-shrink: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 2rem;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  color: #16a34a;
+}
+
+.blockquote-content {
+  min-width: 0;
+}
+
+/* =========================================================
+   INLINE CODE
+========================================================= */
+
+.markdown-body :not(pre) > code,
+.markdown-inline-code {
+  display: inline;
+
+  padding: 0.15rem 0.4rem;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 4px;
+
+  background-color: #f3f4f6;
+
+  color: #111827;
+
+  font-family:
+    "Courier New",
+    Courier,
+    monospace;
+
+  font-size: 0.86em;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   CODE BLOCK
+========================================================= */
+
+.markdown-code-wrapper {
+  width: 100%;
+
+  margin: 1.75rem 0;
+
+  overflow: hidden;
+
+  border: 2px solid #000;
+
+  border-radius: 8px;
+
+  background-color: #030712;
+
+  box-shadow: 4px 4px 0 #000;
+}
+
+.markdown-code-language {
+  padding: 0.4rem 0.85rem;
+
+  border-bottom: 1px solid #374151;
+
+  background-color: #111827;
+
+  color: #86efac;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.markdown-code-block {
+  width: 100%;
+
+  margin: 0;
+
+  padding: 1rem;
+
+  box-sizing: border-box;
+
+  overflow-x: auto;
+
+  background-color: #030712;
+
+  color: #f3f4f6;
+}
+
+.markdown-code-block code {
+  display: block;
+
+  width: max-content;
+
+  min-width: 100%;
+
+  padding: 0;
+
+  margin: 0;
+
+  background: transparent;
+
+  border: 0;
+
+  color: inherit;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.85rem;
+
+  line-height: 1.7;
+
+  white-space: pre;
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.markdown-divider {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 0.35rem;
+
+  margin: 2.5rem 0;
+}
+
+.markdown-divider span {
+  width: 7px;
+  height: 7px;
+
+  display: block;
+
+  background: #000;
+
+  transform: rotate(45deg);
+}
+
+.markdown-divider span:nth-child(2) {
+  width: 10px;
+  height: 10px;
+
+  background: #22c55e;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.markdown-table-wrapper {
+  width: 100%;
+
+  margin: 1.75rem 0;
+
+  overflow-x: auto;
+
+  border: 2px solid #000;
+}
+
+.markdown-table {
+  width: 100%;
+
+  min-width: 500px;
+
+  border-collapse: collapse;
+
+  background: #fff;
+}
+
+.markdown-table th,
+.markdown-table td {
+  padding: 0.7rem 0.9rem;
+
+  border: 1px solid #000;
+
+  text-align: left;
+
+  vertical-align: top;
+}
+
+.markdown-table th {
+  background-color: #fef08a;
+
+  font-family:
+    var(--font-spacegrotesk),
+    sans-serif;
+
+  font-weight: 800;
+}
+
+.markdown-table tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.markdown-image {
+  margin: 2rem 0;
+
+  text-align: center;
+}
+
+.markdown-image img {
+  display: block;
+
+  max-width: 100%;
+
+  width: auto;
+
+  height: auto;
+
+  margin: auto;
+
+  border: 2px solid #000;
+
+  border-radius: 6px;
+}
+
+.markdown-image figcaption {
+  margin-top: 0.5rem;
+
+  color: #6b7280;
+
+  font-size: 0.8rem;
+
+  font-style: italic;
+}
+
+/* =========================================================
+   MERMAID
+========================================================= */
+
+/*
+  PENTING:
+  Tidak ada border hitam di wrapper.
+*/
+
+.mermaid-wrapper {
+  width: 100%;
+
+  max-width: 100%;
+
+  margin: 1.75rem 0;
+
+  padding: 0;
+
+  background: transparent;
+
+  border: none;
+
+  box-shadow: none;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  box-sizing: border-box;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+/*
+  Container SVG juga transparan.
+*/
+
+.mermaid-content {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  width: 100%;
+
+  min-width: max-content;
+
+  padding: 0.5rem 0;
+}
+
+/*
+  Hilangkan background SVG.
+*/
+
+.mermaid-content svg {
+  display: block;
+
+  width: auto;
+
+  max-width: none;
+
+  height: auto;
+
+  background: transparent !important;
+}
+
+/*
+  Mermaid biasanya menghasilkan
+  background rect untuk SVG.
+
+  Ini yang kita hilangkan.
+*/
+
+.mermaid-content svg > rect:first-child {
+  fill: transparent !important;
+
+  stroke: none !important;
+}
+
+/* =========================================================
+   MERMAID NODE
+========================================================= */
+
+.mermaid-wrapper .node rect,
+.mermaid-wrapper .node circle,
+.mermaid-wrapper .node ellipse,
+.mermaid-wrapper .node polygon,
+.mermaid-wrapper .node path {
+  fill: #ffffff !important;
+
+  stroke: #000000 !important;
+
+  stroke-width: 1.5px !important;
+}
+
+/* =========================================================
+   MERMAID SEQUENCE DIAGRAM
+========================================================= */
+
+.mermaid-wrapper .actor {
+  fill: #ffffff !important;
+
+  stroke: #000000 !important;
+}
+
+.mermaid-wrapper .actor-line {
+  stroke: #000000 !important;
+
+  stroke-width: 1.5px !important;
+}
+
+.mermaid-wrapper .messageLine0,
+.mermaid-wrapper .messageLine1 {
+  stroke: #000000 !important;
+
+  stroke-width: 1.5px !important;
+}
+
+.mermaid-wrapper .messageText,
+.mermaid-wrapper .labelText,
+.mermaid-wrapper .loopText {
+  fill: #000000 !important;
+
+  color: #000000 !important;
+
+  font-family:
+    var(--font-poppins),
+    sans-serif !important;
+}
+
+/* =========================================================
+   MERMAID EDGE
+========================================================= */
+
+.mermaid-wrapper .edgePath path,
+.mermaid-wrapper .flowchart-link {
+  stroke: #000000 !important;
+
+  stroke-width: 1.5px !important;
+}
+
+/* =========================================================
+   MERMAID LABEL
+========================================================= */
+
+.mermaid-wrapper .edgeLabel {
+  background: transparent !important;
+
+  color: #000 !important;
+}
+
+.mermaid-wrapper .edgeLabel rect {
+  fill: #fef9c3 !important;
+
+  stroke: none !important;
+}
+
+/* =========================================================
+   MERMAID CLUSTER
+========================================================= */
+
+.mermaid-wrapper .cluster rect {
+  fill: #fef9c3 !important;
+
+  stroke: #000000 !important;
+}
+
+/* =========================================================
+   MERMAID TEXT
+========================================================= */
+
+.mermaid-wrapper text,
+.mermaid-wrapper .nodeLabel {
+  fill: #000000 !important;
+
+  color: #000000 !important;
+
+  font-family:
+    var(--font-poppins),
+    sans-serif !important;
+}
+
+/* =========================================================
+   MERMAID LOADING
+========================================================= */
+
+.mermaid-loading {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  min-height: 80px;
+
+  color: #6b7280;
+
+  font-size: 0.85rem;
+}
+
+.mermaid-loading-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background-color: #22c55e;
+
+  animation: markdown-pulse 1s infinite ease-in-out;
+}
+
+@keyframes markdown-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   MERMAID ERROR
+========================================================= */
+
+.mermaid-error {
+  width: 100%;
+
+  margin: 1.75rem 0;
+
+  padding: 1rem;
+
+  box-sizing: border-box;
+
+  border: 2px solid #dc2626;
+
+  background-color: #fef2f2;
+
+  color: #991b1b;
+}
+
+.mermaid-error-title {
+  margin-bottom: 0.25rem;
+
+  font-family:
+    var(--font-spacegrotesk),
+    sans-serif;
+
+  font-size: 0.9rem;
+
+  font-weight: 800;
+}
+
+.mermaid-error-message {
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   KATEX
+========================================================= */
+
+.markdown-body .katex {
+  font-size: 1.05em;
+}
+
+.markdown-body .katex-display {
+  width: 100%;
+
+  max-width: 100%;
+
+  margin: 1.75rem 0;
+
+  padding: 1rem;
+
+  box-sizing: border-box;
+
+  border: 2px solid #000;
+
+  background-color: #f9fafb;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .markdown-body {
+    font-size: 0.9rem;
+
+    line-height: 1.75;
+  }
+
+  .markdown-body h1 {
+    font-size: 1.55rem;
+  }
+
+  .markdown-body h2 {
+    font-size: 1.3rem;
+  }
+
+  .markdown-body h3 {
+    font-size: 1.15rem;
+  }
+
+  .markdown-code-wrapper {
+    margin: 1.25rem 0;
+
+    border-radius: 6px;
+
+    box-shadow: 3px 3px 0 #000;
+  }
+
+  .markdown-code-block {
+    padding: 0.8rem;
+  }
+
+  .markdown-code-block code {
+    font-size: 0.75rem;
+  }
+
+  .markdown-table-wrapper {
+    margin: 1.25rem 0;
+  }
+
+  .markdown-table {
+    min-width: 450px;
+
+    font-size: 0.8rem;
+  }
+
+  .markdown-table th,
+  .markdown-table td {
+    padding: 0.55rem 0.65rem;
+  }
+
+  .mermaid-wrapper {
+    margin: 1.25rem 0;
+
+    padding: 0;
+  }
+
+  .mermaid-content {
+    justify-content: flex-start;
+
+    padding: 0.25rem 0;
+  }
+
+  .markdown-body .katex-display {
+    padding: 0.75rem;
+  }
+}
