@@ -118,7 +118,7 @@ const BlogListPage = () => {
               {blogs.map((blog, index) => (
                 <Link
                   key={blog.id}
-                  href={`/blog/${blog.judul}`}
+                  href={`/blog/${blog.id}`}
                   className="group h-full"
                 >
                   <article
