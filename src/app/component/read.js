@@ -29,9 +29,8 @@ const BlogDetailPage = () => {
     return () => clearCurrentBlog();
   }, [id, fetchBlogById, clearCurrentBlog]);
 
-  // Jika currentBlog adalah array
-  const blog = currentBlog?.[0];
-  console.log(currentBlog)
+  // currentBlog sekarang berupa object tunggal, bukan array
+  const blog = currentBlog;
   const isOwner = session?.user?.id === blog?.author_id;
 
   const handleDelete = async () => {
