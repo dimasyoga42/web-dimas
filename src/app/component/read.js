@@ -31,7 +31,7 @@ const BlogDetailPage = () => {
 
   // Jika currentBlog adalah array
   const blog = currentBlog?.[0];
-
+  console.log(currentBlog)
   const isOwner = session?.user?.id === blog?.author_id;
 
   const handleDelete = async () => {
