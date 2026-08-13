@@ -14,17 +14,12 @@ async function parseJsonSafely(res) {
 }
 
 const useBlogStore = create((set, get) => ({
-  // ============================
-  // STATE
-  // ============================
   blogs: [],
   currentBlog: null,
   loading: false,
   error: null,
 
-  // ============================
   // GET ALL BLOGS
-  // ============================
   fetchBlogs: async () => {
     set({ loading: true, error: null });
     try {
@@ -37,15 +32,12 @@ const useBlogStore = create((set, get) => ({
     }
   },
 
-  // ============================
   // GET BLOG BY ID
-  // ============================
-  fetchBlogById: async (name) => {
+  fetchBlogById: async (id) => {
     set({ loading: true, error: null, currentBlog: null });
     try {
-      const res = await fetch(`${API_URL}/blogs?name=${name}`);
+      const res = await fetch(`${API_URL}/blogs/${id}`);
       const data = await parseJsonSafely(res);
-      console.log(data)
       if (!res.ok) throw new Error(data?.error || "Blog tidak ditemukan");
       set({ currentBlog: data, loading: false });
     } catch (err) {
@@ -53,9 +45,7 @@ const useBlogStore = create((set, get) => ({
     }
   },
 
-  // ============================
   // CREATE BLOG
-  // ============================
   createBlog: async ({ judul, deskripsi, isi }) => {
     set({ loading: true, error: null });
     try {
@@ -82,9 +72,7 @@ const useBlogStore = create((set, get) => ({
     }
   },
 
-  // ============================
   // UPDATE BLOG
-  // ============================
   updateBlog: async (id, { judul, deskripsi, isi }) => {
     set({ loading: true, error: null });
     try {
@@ -107,9 +95,7 @@ const useBlogStore = create((set, get) => ({
     }
   },
 
-  // ============================
   // DELETE BLOG
-  // ============================
   deleteBlog: async (id) => {
     set({ loading: true, error: null });
     try {
@@ -129,9 +115,6 @@ const useBlogStore = create((set, get) => ({
     }
   },
 
-  // ============================
-  // RESET / UTILITY
-  // ============================
   clearCurrentBlog: () => set({ currentBlog: null }),
   clearError: () => set({ error: null }),
 }));
