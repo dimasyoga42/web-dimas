@@ -74,7 +74,7 @@ const BlogDetailPage = () => {
             {/* Title & Date */}
             <div className="min-w-0 flex-1">
               <h1 className="font-heading text-2xl font-extrabold leading-tight break-words sm:text-3xl md:text-4xl lg:text-5xl">
-                {blog.judul}
+                {console.log(blog)}
               </h1>
 
               <p className="font-body mt-2 text-xs text-gray-400 sm:text-sm">
