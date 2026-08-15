@@ -36,8 +36,9 @@ const Anime = async () => {
   const session = await getServerSession(authOptions)
   const { data: animeList, error } = await getAnimeList();
   return (
-    <div className="w-full min-h-screen px-4 py-14">
+    <div className=" flex flex-col mx-auto max-w-6xl">
       <Navbar session={session} />
+    <div className="w-full min-h-screen px-4 py-14">
       <div className="max-w-6xl mx-auto">
         <p className="font-body text-xs font-extrabold uppercase tracking-[0.25em] mb-2">
           Anime Streaming
@@ -98,6 +99,7 @@ const Anime = async () => {
             ))}
           </div>
         )}
+      </div>
       </div>
     </div>
   );
