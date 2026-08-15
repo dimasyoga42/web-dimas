@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
@@ -20,29 +20,7 @@
 }
 
 /* =========================================================
-   GRID BACKGROUND
-========================================================= */
-
-.bg-grid {
-  background-color: #fef9c3;
-
-  background-image:
-    linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.08) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.08) 1px,
-      transparent 1px
-    );
-
-  background-size: 40px 40px;
-}
-
-/* =========================================================
-   MARKDOWN
+   MARKDOWN BASE
 ========================================================= */
 
 .markdown-body {
@@ -52,17 +30,17 @@
 
   font-family: var(--font-poppins), sans-serif;
 
-  color: #111;
+  color: #1f2937;
 
   font-size: 0.95rem;
 
-  line-height: 1.8;
+  line-height: 1.75;
 
   overflow-wrap: break-word;
 }
 
 /* =========================================================
-   HEADINGS
+   HEADINGS — lebih ringan, tidak terlalu tebal
 ========================================================= */
 
 .markdown-body h1,
@@ -71,49 +49,51 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  font-family:
-    var(--font-spacegrotesk),
-    sans-serif;
+  font-family: var(--font-spacegrotesk), sans-serif;
 
-  color: #000;
+  color: #111827;
 
-  font-weight: 800;
+  font-weight: 600;
 
-  line-height: 1.2;
+  line-height: 1.3;
 
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .markdown-body h1 {
-  font-size: 2rem;
+  font-size: 1.85rem;
 
-  margin: 2.5rem 0 1.25rem;
+  margin: 2.25rem 0 1.1rem;
 
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.5rem;
 
-  border-bottom: 3px solid #000;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .markdown-body h2 {
-  font-size: 1.6rem;
+  font-size: 1.45rem;
 
-  margin: 2.25rem 0 1rem;
+  margin: 2rem 0 0.9rem;
 
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.35rem;
 
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .markdown-body h3 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 
-  margin: 1.75rem 0 0.7rem;
+  margin: 1.6rem 0 0.6rem;
+
+  font-weight: 600;
 }
 
 .markdown-body h4 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 
-  margin: 1.5rem 0 0.6rem;
+  margin: 1.4rem 0 0.5rem;
+
+  font-weight: 600;
 }
 
 /* =========================================================
@@ -121,7 +101,7 @@
 ========================================================= */
 
 .markdown-body p {
-  margin: 1rem 0;
+  margin: 0.9rem 0;
 }
 
 /* =========================================================
@@ -129,8 +109,8 @@
 ========================================================= */
 
 .markdown-body strong {
-  color: #000;
-  font-weight: 700;
+  color: #111827;
+  font-weight: 600;
 }
 
 .markdown-body em {
@@ -146,13 +126,13 @@
 ========================================================= */
 
 .markdown-body a {
-  color: #15803d;
+  color: #16a34a;
 
-  font-weight: 600;
+  font-weight: 500;
 
   text-decoration: underline;
 
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
 
   text-underline-offset: 3px;
 
@@ -164,9 +144,9 @@
 }
 
 .markdown-body a:hover {
-  color: #000;
+  color: #15803d;
 
-  background-color: #22c55e;
+  background-color: #f0fdf4;
 
   text-decoration: none;
 }
@@ -177,9 +157,9 @@
 
 .markdown-body ul,
 .markdown-body ol {
-  margin: 1rem 0;
+  margin: 0.9rem 0;
 
-  padding-left: 1.7rem;
+  padding-left: 1.5rem;
 }
 
 .markdown-body ul {
@@ -191,13 +171,13 @@
 }
 
 .markdown-body li {
-  margin: 0.4rem 0;
+  margin: 0.35rem 0;
 }
 
 .markdown-body li::marker {
-  color: #16a34a;
+  color: #22c55e;
 
-  font-weight: 800;
+  font-weight: 500;
 }
 
 /* =========================================================
@@ -205,8 +185,8 @@
 ========================================================= */
 
 .markdown-body input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 
   margin-right: 0.5rem;
 
@@ -222,19 +202,19 @@
 .markdown-body blockquote {
   display: flex;
 
-  gap: 0.75rem;
+  gap: 0.65rem;
 
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
 
-  padding: 1rem 1.25rem;
+  padding: 0.85rem 1.1rem;
 
-  border: 2px solid #000;
+  border: none;
 
-  border-left: 6px solid #22c55e;
+  border-left: 3px solid #22c55e;
 
   background-color: #f9fafb;
 
-  color: #374151;
+  color: #4b5563;
 
   font-style: italic;
 }
@@ -244,13 +224,13 @@
 
   font-family: Georgia, serif;
 
-  font-size: 2rem;
+  font-size: 1.6rem;
 
-  font-weight: 900;
+  font-weight: 700;
 
   line-height: 1;
 
-  color: #16a34a;
+  color: #22c55e;
 }
 
 .blockquote-content {
@@ -267,60 +247,57 @@
 
   padding: 0.15rem 0.4rem;
 
-  border: 1px solid #d1d5db;
+  border: 1px solid #e5e7eb;
 
   border-radius: 4px;
 
-  background-color: #f3f4f6;
+  background-color: #f8fafc;
 
-  color: #111827;
+  color: #db2777;
 
-  font-family:
-    "Courier New",
-    Courier,
-    monospace;
+  font-family: "Courier New", Courier, monospace;
 
-  font-size: 0.86em;
+  font-size: 0.85em;
 
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* =========================================================
-   CODE BLOCK
+   CODE BLOCK — minimalis, tanpa shadow tebal
 ========================================================= */
 
 .markdown-code-wrapper {
   width: 100%;
 
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
 
   overflow: hidden;
 
-  border: 2px solid #000;
+  border: 1px solid #1f2937;
 
   border-radius: 8px;
 
-  background-color: #030712;
+  background-color: #0d1117;
 
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: none;
 }
 
 .markdown-code-language {
   padding: 0.4rem 0.85rem;
 
-  border-bottom: 1px solid #374151;
+  border-bottom: 1px solid #30363d;
 
-  background-color: #111827;
+  background-color: #161b22;
 
-  color: #86efac;
+  color: #7ee787;
 
-  font-family:
-    "Courier New",
-    monospace;
+  font-family: "Courier New", monospace;
 
-  font-size: 0.7rem;
+  font-size: 0.68rem;
 
-  font-weight: 700;
+  font-weight: 600;
+
+  letter-spacing: 0.03em;
 
   text-transform: uppercase;
 }
@@ -336,9 +313,9 @@
 
   overflow-x: auto;
 
-  background-color: #030712;
+  background-color: #0d1117;
 
-  color: #f3f4f6;
+  color: #e6edf3;
 }
 
 .markdown-code-block code {
@@ -358,15 +335,145 @@
 
   color: inherit;
 
-  font-family:
-    "Courier New",
-    monospace;
+  font-family: "Courier New", monospace;
 
   font-size: 0.85rem;
 
   line-height: 1.7;
 
   white-space: pre;
+}
+
+/* ---------------------------------------------------------
+   SYNTAX HIGHLIGHTING (colorful) — github-dark palette
+   Kompatibel dengan highlight.js (.hljs-*) & Prism (.token.*)
+--------------------------------------------------------- */
+
+/* highlight.js */
+.markdown-code-block .hljs-keyword,
+.markdown-code-block .hljs-selector-tag,
+.markdown-code-block .hljs-literal,
+.markdown-code-block .hljs-operator {
+  color: #ff7b72;
+}
+
+.markdown-code-block .hljs-string,
+.markdown-code-block .hljs-regexp,
+.markdown-code-block .hljs-addition {
+  color: #a5d6ff;
+}
+
+.markdown-code-block .hljs-number {
+  color: #79c0ff;
+}
+
+.markdown-code-block .hljs-comment,
+.markdown-code-block .hljs-quote {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.markdown-code-block .hljs-title,
+.markdown-code-block .hljs-title.function_,
+.markdown-code-block .hljs-title.class_,
+.markdown-code-block .hljs-section {
+  color: #d2a8ff;
+}
+
+.markdown-code-block .hljs-attr,
+.markdown-code-block .hljs-attribute,
+.markdown-code-block .hljs-variable,
+.markdown-code-block .hljs-template-variable {
+  color: #ffa657;
+}
+
+.markdown-code-block .hljs-built_in,
+.markdown-code-block .hljs-type,
+.markdown-code-block .hljs-class {
+  color: #ffa657;
+}
+
+.markdown-code-block .hljs-tag {
+  color: #7ee787;
+}
+
+.markdown-code-block .hljs-name {
+  color: #7ee787;
+}
+
+.markdown-code-block .hljs-params {
+  color: #e6edf3;
+}
+
+.markdown-code-block .hljs-deletion {
+  color: #ffa198;
+}
+
+.markdown-code-block .hljs-symbol,
+.markdown-code-block .hljs-bullet {
+  color: #79c0ff;
+}
+
+.markdown-code-block .hljs-meta {
+  color: #79c0ff;
+}
+
+.markdown-code-block .hljs-emphasis {
+  font-style: italic;
+}
+
+.markdown-code-block .hljs-strong {
+  font-weight: 700;
+}
+
+/* Prism.js tokens */
+.markdown-code-block .token.keyword,
+.markdown-code-block .token.selector,
+.markdown-code-block .token.operator {
+  color: #ff7b72;
+}
+
+.markdown-code-block .token.string,
+.markdown-code-block .token.attr-value,
+.markdown-code-block .token.regex {
+  color: #a5d6ff;
+}
+
+.markdown-code-block .token.number,
+.markdown-code-block .token.boolean {
+  color: #79c0ff;
+}
+
+.markdown-code-block .token.comment,
+.markdown-code-block .token.prolog,
+.markdown-code-block .token.doctype,
+.markdown-code-block .token.cdata {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.markdown-code-block .token.function,
+.markdown-code-block .token.class-name {
+  color: #d2a8ff;
+}
+
+.markdown-code-block .token.property,
+.markdown-code-block .token.attr-name,
+.markdown-code-block .token.variable {
+  color: #ffa657;
+}
+
+.markdown-code-block .token.tag {
+  color: #7ee787;
+}
+
+.markdown-code-block .token.punctuation {
+  color: #c9d1d9;
+}
+
+.markdown-code-block .token.builtin,
+.markdown-code-block .token.constant {
+  color: #ffa657;
 }
 
 /* =========================================================
@@ -382,39 +489,41 @@
 
   gap: 0.35rem;
 
-  margin: 2.5rem 0;
+  margin: 2.25rem 0;
 }
 
 .markdown-divider span {
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
 
   display: block;
 
-  background: #000;
+  border-radius: 50%;
 
-  transform: rotate(45deg);
+  background: #d1d5db;
 }
 
 .markdown-divider span:nth-child(2) {
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
 
   background: #22c55e;
 }
 
 /* =========================================================
-   TABLE
+   TABLE — tanpa background, garis tipis
 ========================================================= */
 
 .markdown-table-wrapper {
   width: 100%;
 
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
 
   overflow-x: auto;
 
-  border: 2px solid #000;
+  border: 1px solid #e5e7eb;
+
+  border-radius: 6px;
 }
 
 .markdown-table {
@@ -424,14 +533,16 @@
 
   border-collapse: collapse;
 
-  background: #fff;
+  background: transparent;
 }
 
 .markdown-table th,
 .markdown-table td {
-  padding: 0.7rem 0.9rem;
+  padding: 0.6rem 0.85rem;
 
-  border: 1px solid #000;
+  border: 1px solid #e5e7eb;
+
+  background: transparent;
 
   text-align: left;
 
@@ -439,17 +550,23 @@
 }
 
 .markdown-table th {
-  background-color: #fef08a;
+  background: transparent;
 
-  font-family:
-    var(--font-spacegrotesk),
-    sans-serif;
+  border-bottom: 2px solid #d1d5db;
 
-  font-weight: 800;
+  font-family: var(--font-spacegrotesk), sans-serif;
+
+  font-weight: 600;
+
+  color: #111827;
 }
 
-.markdown-table tbody tr:nth-child(even) {
-  background-color: #f9fafb;
+.markdown-table tbody tr {
+  background: transparent;
+}
+
+.markdown-table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid #f0f0f0;
 }
 
 /* =========================================================
@@ -457,7 +574,7 @@
 ========================================================= */
 
 .markdown-image {
-  margin: 2rem 0;
+  margin: 1.75rem 0;
 
   text-align: center;
 }
@@ -473,7 +590,7 @@
 
   margin: auto;
 
-  border: 2px solid #000;
+  border: 1px solid #e5e7eb;
 
   border-radius: 6px;
 }
@@ -481,7 +598,7 @@
 .markdown-image figcaption {
   margin-top: 0.5rem;
 
-  color: #6b7280;
+  color: #9ca3af;
 
   font-size: 0.8rem;
 
@@ -492,17 +609,12 @@
    MERMAID
 ========================================================= */
 
-/*
-  PENTING:
-  Tidak ada border hitam di wrapper.
-*/
-
 .mermaid-wrapper {
   width: 100%;
 
   max-width: 100%;
 
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
 
   padding: 0;
 
@@ -521,10 +633,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/*
-  Container SVG juga transparan.
-*/
-
 .mermaid-content {
   display: flex;
 
@@ -539,10 +647,6 @@
   padding: 0.5rem 0;
 }
 
-/*
-  Hilangkan background SVG.
-*/
-
 .mermaid-content svg {
   display: block;
 
@@ -555,22 +659,11 @@
   background: transparent !important;
 }
 
-/*
-  Mermaid biasanya menghasilkan
-  background rect untuk SVG.
-
-  Ini yang kita hilangkan.
-*/
-
 .mermaid-content svg > rect:first-child {
   fill: transparent !important;
 
   stroke: none !important;
 }
-
-/* =========================================================
-   MERMAID NODE
-========================================================= */
 
 .mermaid-wrapper .node rect,
 .mermaid-wrapper .node circle,
@@ -579,96 +672,72 @@
 .mermaid-wrapper .node path {
   fill: #ffffff !important;
 
-  stroke: #000000 !important;
+  stroke: #9ca3af !important;
 
-  stroke-width: 1.5px !important;
+  stroke-width: 1.25px !important;
 }
-
-/* =========================================================
-   MERMAID SEQUENCE DIAGRAM
-========================================================= */
 
 .mermaid-wrapper .actor {
   fill: #ffffff !important;
 
-  stroke: #000000 !important;
+  stroke: #9ca3af !important;
 }
 
 .mermaid-wrapper .actor-line {
-  stroke: #000000 !important;
+  stroke: #9ca3af !important;
 
-  stroke-width: 1.5px !important;
+  stroke-width: 1.25px !important;
 }
 
 .mermaid-wrapper .messageLine0,
 .mermaid-wrapper .messageLine1 {
-  stroke: #000000 !important;
+  stroke: #6b7280 !important;
 
-  stroke-width: 1.5px !important;
+  stroke-width: 1.25px !important;
 }
 
 .mermaid-wrapper .messageText,
 .mermaid-wrapper .labelText,
 .mermaid-wrapper .loopText {
-  fill: #000000 !important;
+  fill: #111827 !important;
 
-  color: #000000 !important;
+  color: #111827 !important;
 
-  font-family:
-    var(--font-poppins),
-    sans-serif !important;
+  font-family: var(--font-poppins), sans-serif !important;
 }
-
-/* =========================================================
-   MERMAID EDGE
-========================================================= */
 
 .mermaid-wrapper .edgePath path,
 .mermaid-wrapper .flowchart-link {
-  stroke: #000000 !important;
+  stroke: #9ca3af !important;
 
-  stroke-width: 1.5px !important;
+  stroke-width: 1.25px !important;
 }
-
-/* =========================================================
-   MERMAID LABEL
-========================================================= */
 
 .mermaid-wrapper .edgeLabel {
   background: transparent !important;
 
-  color: #000 !important;
+  color: #111827 !important;
 }
 
 .mermaid-wrapper .edgeLabel rect {
-  fill: #fef9c3 !important;
+  fill: #f9fafb !important;
 
   stroke: none !important;
 }
 
-/* =========================================================
-   MERMAID CLUSTER
-========================================================= */
-
 .mermaid-wrapper .cluster rect {
-  fill: #fef9c3 !important;
+  fill: #f9fafb !important;
 
-  stroke: #000000 !important;
+  stroke: #e5e7eb !important;
 }
-
-/* =========================================================
-   MERMAID TEXT
-========================================================= */
 
 .mermaid-wrapper text,
 .mermaid-wrapper .nodeLabel {
-  fill: #000000 !important;
+  fill: #111827 !important;
 
-  color: #000000 !important;
+  color: #111827 !important;
 
-  font-family:
-    var(--font-poppins),
-    sans-serif !important;
+  font-family: var(--font-poppins), sans-serif !important;
 }
 
 /* =========================================================
@@ -686,14 +755,14 @@
 
   min-height: 80px;
 
-  color: #6b7280;
+  color: #9ca3af;
 
   font-size: 0.85rem;
 }
 
 .mermaid-loading-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 
   border-radius: 50%;
 
@@ -724,29 +793,29 @@
 .mermaid-error {
   width: 100%;
 
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
 
   padding: 1rem;
 
   box-sizing: border-box;
 
-  border: 2px solid #dc2626;
+  border: 1px solid #fca5a5;
+
+  border-radius: 6px;
 
   background-color: #fef2f2;
 
-  color: #991b1b;
+  color: #b91c1c;
 }
 
 .mermaid-error-title {
   margin-bottom: 0.25rem;
 
-  font-family:
-    var(--font-spacegrotesk),
-    sans-serif;
+  font-family: var(--font-spacegrotesk), sans-serif;
 
   font-size: 0.9rem;
 
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .mermaid-error-message {
@@ -758,11 +827,11 @@
 }
 
 /* =========================================================
-   KATEX
+   KATEX — lebih rapi, tanpa kotak tebal
 ========================================================= */
 
 .markdown-body .katex {
-  font-size: 1.05em;
+  font-size: 1.02em;
 }
 
 .markdown-body .katex-display {
@@ -770,19 +839,27 @@
 
   max-width: 100%;
 
-  margin: 1.75rem 0;
+  margin: 1.5rem 0;
 
-  padding: 1rem;
+  padding: 0.9rem 1rem;
 
   box-sizing: border-box;
 
-  border: 2px solid #000;
+  border: none;
 
-  background-color: #f9fafb;
+  border-left: 2px solid #e5e7eb;
+
+  background-color: transparent;
 
   overflow-x: auto;
 
   overflow-y: hidden;
+}
+
+.markdown-body .katex-display > .katex {
+  text-align: center;
+
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -793,27 +870,25 @@
   .markdown-body {
     font-size: 0.9rem;
 
-    line-height: 1.75;
+    line-height: 1.7;
   }
 
   .markdown-body h1 {
-    font-size: 1.55rem;
+    font-size: 1.4rem;
   }
 
   .markdown-body h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .markdown-body h3 {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
   }
 
   .markdown-code-wrapper {
-    margin: 1.25rem 0;
+    margin: 1.1rem 0;
 
     border-radius: 6px;
-
-    box-shadow: 3px 3px 0 #000;
   }
 
   .markdown-code-block {
@@ -825,7 +900,7 @@
   }
 
   .markdown-table-wrapper {
-    margin: 1.25rem 0;
+    margin: 1.1rem 0;
   }
 
   .markdown-table {
@@ -836,11 +911,11 @@
 
   .markdown-table th,
   .markdown-table td {
-    padding: 0.55rem 0.65rem;
+    padding: 0.5rem 0.6rem;
   }
 
   .mermaid-wrapper {
-    margin: 1.25rem 0;
+    margin: 1.1rem 0;
 
     padding: 0;
   }
@@ -852,6 +927,6 @@
   }
 
   .markdown-body .katex-display {
-    padding: 0.75rem;
+    padding: 0.7rem 0.85rem;
   }
 }
