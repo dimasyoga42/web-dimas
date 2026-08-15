@@ -42,6 +42,23 @@ const Navbar = ({ session }) => {
             Home
           </Link>
           <Link
+            href="/anime"
+            className="
+              border-2 border-black
+              bg-white
+              px-4 py-2
+              font-bold text-black
+              shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+              transition-all
+              hover:translate-x-[2px]
+              hover:translate-y-[2px]
+              hover:bg-green-400
+              hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+            "
+          >
+            Anime
+          </Link>
+          <Link
             href="/blog"
             className="
               border-2 border-black
@@ -168,6 +185,25 @@ const Navbar = ({ session }) => {
               "
             >
               Home
+            </Link>
+            <Link
+              href="/anime"
+              onClick={closeMenu}
+              className="
+                border-2 border-black
+                bg-white
+                px-4 py-3
+                text-center
+                font-bold text-black
+                shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+                transition-all
+                hover:translate-x-[2px]
+                hover:translate-y-[2px]
+                hover:bg-green-400
+                hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+              "
+            >
+              Anime
             </Link>
             <Link
               href="/blog"
