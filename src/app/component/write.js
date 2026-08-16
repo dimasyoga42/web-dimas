@@ -1,14 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import CodeMirror from "@uiw/react-codemirror";
-import { markdown } from "@codemirror/lang-markdown";
-import { EditorView } from "@codemirror/view";
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import ListTool from "@editorjs/list";
+import Quote from "@editorjs/quote";
+import CodeTool from "@editorjs/code";
+import InlineCode from "@editorjs/inline-code";
 import useBlogStore from "@/app/store/useBlogStore";
 import MarkdownRenderer from "@/app/component/MarkdownRenderer";
+
+// -----------------------------------------------------------
+// Konversi output EditorJS (blocks) -> string markdown
+// -----------------------------------------------------------
+const blockToMarkdown = (block) => {
+  const { type, data } = block;
+
+  switch (type) {
+    case "header": {
+      const level = data.level || 2;
+      return `${"#".repeat(level)} ${stripInlineHtml(data.text)}`;
+    }
+
+    case "paragraph": {
+      return stripInlineHtml(data.text);
+    }
+
+    case "list": {
+      const isOrdered = data.style === "ordered";
+      return data.items
+        .map((item, i) =>
+          isOrdered
+            ? `${i + 1}. ${stripInlineHtml(item)}`
+            : `- ${stripInlineHtml(item)}`
+        )
+        .join("\n");
+    }
+
+    case "quote": {
+      const text = stripInlineHtml(data.text);
+      const caption = data.caption ? `\n> — ${stripInlineHtml(data.caption)}` : "";
+      return `> ${text}${caption}`;
+    }
+
+    case "code": {
+      return `\`\`\`\n${data.code}\n\`\`\``;
+    }
+
+    default:
+      return "";
+  }
+};
+
+const stripInlineHtml = (html = "") => {
+  return html
+    .replace(/<b>(.*?)<\/b>/g, "**$1**")
+    .replace(/<i>(.*?)<\/i>/g, "*$1*")
+    .replace(/<code[^>]*>(.*?)<\/code>/g, "`$1`")
+    .replace(/<a href="(.*?)".*?>(.*?)<\/a>/g, "[$2]($1)")
+    .replace(/<mark[^>]*>(.*?)<\/mark>/g, "$1")
+    .replace(/&nbsp;/g, " ")
+    .trim();
+};
+
+const editorOutputToMarkdown = (outputData) => {
+  if (!outputData?.blocks) return "";
+  return outputData.blocks.map(blockToMarkdown).join("\n\n");
+};
 
 const WriteBlog = () => {
   const router = useRouter();
@@ -17,24 +76,66 @@ const WriteBlog = () => {
   const [form, setForm] = useState({
     judul: "",
     deskripsi: "",
-    isi: "",
   });
-  const [tab, setTab] = useState("write"); // "write" | "preview"
   const [formError, setFormError] = useState("");
+  const [previewMarkdown, setPreviewMarkdown] = useState("");
+
+  const editorRef = useRef(null);
+  const debounceRef = useRef(null);
+
+  // update preview otomatis dengan debounce biar tidak convert di setiap keystroke
+  const updatePreview = useCallback((api) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(async () => {
+      const outputData = await api.saver.save();
+      setPreviewMarkdown(editorOutputToMarkdown(outputData));
+    }, 400);
+  }, []);
+
+  useEffect(() => {
+    if (editorRef.current) return;
+
+    const editor = new EditorJS({
+      holder: "editorjs",
+      placeholder: "Mulai tulis isi blog kamu di sini...",
+      autofocus: false,
+      tools: {
+        header: {
+          class: Header,
+          config: {
+            levels: [1, 2, 3],
+            defaultLevel: 2,
+          },
+        },
+        list: ListTool,
+        quote: Quote,
+        code: CodeTool,
+        inlineCode: InlineCode,
+      },
+      onChange: (api) => updatePreview(api),
+    });
+
+    editorRef.current = editor;
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      if (editorRef.current?.destroy) {
+        editorRef.current.destroy();
+        editorRef.current = null;
+      }
+    };
+  }, [updatePreview]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleIsiChange = (value) => {
-    setForm((prev) => ({ ...prev, isi: value }));
-  };
-
-  const validate = () => {
+  const validate = (markdown) => {
     if (form.judul.trim().length < 3) {
       return "Judul minimal 3 karakter";
     }
-    if (form.isi.trim().length < 10) {
+    if (!markdown || markdown.trim().length < 10) {
       return "Isi blog minimal 10 karakter";
     }
     return null;
@@ -44,127 +145,108 @@ const WriteBlog = () => {
     e.preventDefault();
     setFormError("");
 
-    const err = validate();
+    if (!editorRef.current) return;
+
+    const outputData = await editorRef.current.save();
+    const markdown = editorOutputToMarkdown(outputData);
+
+    const err = validate(markdown);
     if (err) {
       setFormError(err);
       return;
     }
 
-    const result = await createBlog(form);
+    const payload = {
+      ...form,
+      isi: markdown,
+    };
+
+    const result = await createBlog(payload);
     if (result.success) {
       router.push(`/blog/${result.data.id}`);
     }
   };
 
   return (
-    <div className="w-full min-h-screen px-4 py-10">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="font-heading font-extrabold text-3xl mb-8">
-          Tulis Blog Baru
-        </h1>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          {/* Judul */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold">Judul</label>
-            <input
-              type="text"
-              name="judul"
-              value={form.judul}
-              onChange={handleChange}
-              placeholder="Judul blog kamu"
-              className="border-2 border-black px-3 py-2 font-body text-sm focus:outline-none focus:border-green-500"
-              required
-            />
-          </div>
-
-          {/* Deskripsi */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold">
-              Deskripsi singkat
-            </label>
-            <input
-              type="text"
-              name="deskripsi"
-              value={form.deskripsi}
-              onChange={handleChange}
-              placeholder="Ringkasan singkat untuk preview blog"
-              className="border-2 border-black px-3 py-2 font-body text-sm focus:outline-none focus:border-green-500"
-            />
-          </div>
-
-          {/* Isi - Markdown editor */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold">
-              Isi (Markdown)
-            </label>
-
-            {/* Tab switcher */}
-            <div className="flex border-2 border-black border-b-0 w-fit">
-              <button
-                type="button"
-                onClick={() => setTab("write")}
-                className={`px-4 py-1.5 text-sm font-body font-semibold ${
-                  tab === "write" ? "bg-black text-white" : "bg-white"
-                }`}
-              >
-                Tulis
-              </button>
-              <button
-                type="button"
-                onClick={() => setTab("preview")}
-                className={`px-4 py-1.5 text-sm font-body font-semibold border-l-2 border-black ${
-                  tab === "preview" ? "bg-black text-white" : "bg-white"
-                }`}
-              >
-                Preview
-              </button>
-            </div>
-
-            {tab === "write" ? (
-              <div className="border-2 border-black focus-within:border-green-500">
-                <CodeMirror
-                  value={form.isi}
-                  onChange={handleIsiChange}
-                  extensions={[markdown(), EditorView.lineWrapping]}
-                  height="400px"
-                  placeholder={`Tulis dengan markdown, contoh:\n\n# Judul besar\n\n**tebal**, *miring*\n\n- list item\n- list item\n\n\`\`\`js\nconsole.log("hello")\n\`\`\``}
-                  basicSetup={{
-                    lineNumbers: true,
-                    foldGutter: false,
-                    highlightActiveLine: true,
-                  }}
-                  className="font-mono text-sm"
-                />
-              </div>
-            ) : (
-              <div className="border-2 border-black px-4 py-3 min-h-[300px] prose prose-sm max-w-none font-body">
-                {form.isi.trim() ? (
-                  <MarkdownRenderer content={form.isi} />
-                ) : (
-                  <p className="text-gray-400">
-                    Belum ada konten untuk dipreview...
-                  </p>
-                )}
-              </div>
-            )}
-          </div>
-
-          {(formError || error) && (
-            <p className="font-body text-sm text-red-600 bg-red-50 border border-red-300 px-3 py-2">
-              {formError || error}
-            </p>
-          )}
+    <div className="min-h-screen flex flex-col">
+      {/* Header sticky */}
+      <div className="sticky top-0 z-20 bg-white border-b-2 border-black">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="font-body text-sm font-semibold text-gray-600 hover:text-black"
+          >
+            ← Kembali
+          </button>
 
           <button
             type="submit"
+            form="blog-form"
             disabled={loading}
-            className="mt-2 border-2 border-black bg-green-500 text-white font-heading font-bold text-sm py-2.5 hover:bg-black transition-colors duration-150 disabled:opacity-50 w-fit px-8"
+            className="border-2 border-black bg-green-500 text-white font-heading font-bold text-sm py-2 px-6 hover:bg-black transition-colors duration-150 disabled:opacity-50"
           >
             {loading ? "Menyimpan..." : "Publish Blog"}
           </button>
-        </form>
+        </div>
+
+        {(formError || error) && (
+          <div className="max-w-6xl mx-auto px-4 pb-3">
+            <p className="font-body text-sm text-red-600 bg-red-50 border border-red-300 px-3 py-2">
+              {formError || error}
+            </p>
+          </div>
+        )}
       </div>
+
+      {/* Judul & deskripsi */}
+      <form id="blog-form" onSubmit={handleSubmit} className="flex-1 flex flex-col">
+        <div className="max-w-6xl mx-auto w-full px-4 pt-8 pb-4 flex flex-col gap-3">
+          <input
+            type="text"
+            name="judul"
+            value={form.judul}
+            onChange={handleChange}
+            placeholder="Judul blog kamu"
+            className="font-heading font-extrabold text-4xl w-full outline-none placeholder:text-gray-300"
+            required
+          />
+
+          <input
+            type="text"
+            name="deskripsi"
+            value={form.deskripsi}
+            onChange={handleChange}
+            placeholder="Tambahkan deskripsi singkat..."
+            className="font-body text-base text-gray-500 w-full outline-none placeholder:text-gray-300"
+          />
+        </div>
+
+        {/* Split view: editor kiri, preview kanan */}
+        <div className="flex-1 max-w-6xl mx-auto w-full px-4 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="min-w-0">
+            <p className="font-body text-xs font-semibold text-gray-400 uppercase mb-2">
+              Editor
+            </p>
+            <div id="editorjs"></div>
+          </div>
+
+          <div className="min-w-0 lg:border-l-2 lg:border-black lg:pl-6">
+            <p className="font-body text-xs font-semibold text-gray-400 uppercase mb-2">
+              Preview
+            </p>
+            <div className="prose prose-sm max-w-none font-body">
+              {previewMarkdown.trim() ? (
+                <MarkdownRenderer content={previewMarkdown} />
+              ) : (
+                <p className="text-gray-400">
+                  Preview akan muncul otomatis saat kamu mulai menulis...
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };
