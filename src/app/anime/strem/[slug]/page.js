@@ -85,7 +85,7 @@ const StremContent = ({ slug }) => {
   if (loading) {
     return (
       <div className="w-full min-h-screen px-4 py-14">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl flex full h-screen m-auto justify-center justify-items-center items-center mx-auto">
           <p className="font-body text-sm text-gray-400">
             Memuat episode...
           </p>
